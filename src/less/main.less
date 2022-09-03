@@ -1,0 +1,140 @@
+.maindiv {
+    --progress-bgColor: #ccc;
+    --progress-fillColor: #000;
+
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;    
+
+    .player {
+        position: relative;
+        overflow: hidden;
+        height: 360px;
+
+        video {
+            border-radius: 30px;
+            &.inheritedSize {
+                width: inherit;
+                height: inherit;
+            }
+        }
+
+        .triangle-left{
+            width: 55%;
+            position: absolute;
+            height: 10px;
+            left: 0px;
+            background-color: #fff;
+            transform: rotate(359deg);
+            top: -8px;
+        }
+
+        .triangle-right{
+            width: 55%;
+            position: absolute;
+            height: 10px;
+            right: 0px;
+            background-color: #fff;
+            transform: rotate(1deg);
+            top: -8px;
+        }
+
+        .triangle-bottom-left{
+            width: 55%;
+            position: absolute;
+            height: 10px;
+            left: 0px;
+            background-color: #fff;
+            transform: rotate(1deg);
+            bottom: -9px;
+        }
+
+        .triangle-bottom-right{
+            width: 55%;
+            position: absolute;
+            height: 10px;
+            right: 0px;
+            background-color: #fff;
+            transform: rotate(359deg);
+            bottom: -9px;
+        }
+
+        .commands-layer {
+            display: none;
+            //display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            position: absolute;
+            box-sizing: border-box;
+            bottom: 20px;
+            padding: 0 10px;
+            width: 100%;
+            // background-color: rgba(0, 0, 0, .5);
+            .command {
+                color: #fff;
+                font-size: 14px;
+                cursor: pointer;
+                margin-right: 2px;
+                width: 26px;
+                height: 25px;
+                border-radius: 50%;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(203 203 203 / 60%);
+                &:hover {
+                    color: #ccc;
+                }
+
+                &.progress {
+                    width: 100%;
+                    background-color: var(--progress-bgColor);
+                    height: 2px;
+                    cursor: pointer;
+                    margin-bottom: 3px;
+                    border-radius: 0;
+                    &:hover {
+                        height: 8px;
+                    }
+                }
+
+                &.time {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    margin-bottom: 2px;
+                    font-size: 10px;
+                    padding: 0 5px;
+                    border-radius: 12px;
+                    width: auto;
+                    background: transparent;
+                    font-weight: bold;
+                    cursor: default;
+                    &:hover {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            .commands-layer {
+                display: flex;
+            }
+        }
+    }
+    
+    .service-commands {
+        margin-top: 10px;
+        label {
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+}
+
+@import "./fontawesome/fontawesome.less";
+@import "./fontawesome/solid.less";
+@import "./fontawesome/regular.less";

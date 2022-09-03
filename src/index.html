@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tractive video player</title>
+    <script src="bundle.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="maindiv">
+        <div class="player">
+            <div class="triangle-left"></div>
+            <div class="triangle-right"></div>
+            <div class="triangle-bottom-left"></div>
+            <div class="triangle-bottom-right"></div>
+        </div>
+        <div class="service-commands">
+            <div>
+                Buttons:
+                <label for="play">
+                    <input id="play" type="checkbox" name="play"> Play
+                </label>
+                <label for="download">
+                    <input id="download" type="checkbox" name="download"> Download
+                </label>
+                <label for="mute">
+                    <input id="mute" type="checkbox" name="mute"> Mute
+                </label>
+                <label for="volume">
+                    <input id="volume" type="checkbox" name="volume"> Volume
+                </label>
+                <label for="timer">
+                    <input id="timer" type="checkbox" name="timer"> Timer
+                </label>
+                <label for="progress">
+                    <input id="progress" type="checkbox" name="progress"> Progress
+                </label>
+                <label for="fullscreen">
+                    <input id="fullscreen" type="checkbox" name="fullscreen"> Fullscreen
+                </label>
+                
+            </div>
+            <div>
+                <button class="init-player">Init player</button>
+                <button class="destroy-player">Destroy player</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
