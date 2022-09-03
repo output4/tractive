@@ -1,5 +1,8 @@
 import BaseCommand from './base';
 
+/**
+ * Download video command
+ */
 export default class Download extends BaseCommand {
     private _btn: HTMLElement;
 

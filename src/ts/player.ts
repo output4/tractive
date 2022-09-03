@@ -55,7 +55,7 @@ export default class TractivePlayer {
     private _init(): void {
         this._mediaContainer = document.createElement('video');
         this._container.appendChild(this._mediaContainer);
-        this._mediaContainer.addEventListener('loadedmetadata', this._resize);
+        this._mediaContainer.addEventListener('loadeddata', this._resize);
         this._mediaContainer.addEventListener('error', this._handleError);
         
         /**

@@ -4,7 +4,7 @@ import { CommandsArray, IConfig } from './interfaces';
 
 /**
  * Simple script for init player
- * This file without logic, just for manipulate with player
+ * This file has no logic, just for manipulation and setting up the player
  */
 
 // test url for player
