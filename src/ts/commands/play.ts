@@ -1,5 +1,8 @@
 import BaseCommand from './base';
 
+/**
+ * Play / Pause button
+ */
 export default class Play extends BaseCommand {
     private _btn: HTMLElement;
 
@@ -23,17 +26,22 @@ export default class Play extends BaseCommand {
             this._onPlay();
         }
     }
-
+    
+    /**
+     * When player playing or paused we need to switch icons on button
+     */
     private _onPlay(): void {
         this._btn.classList.remove('fa-play');
         this._btn.classList.add('fa-pause');
     }
-
     private _onPause(): void {
         this._btn.classList.remove('fa-pause');
         this._btn.classList.add('fa-play');
     }
 
+    /**
+     * Run play / pause
+     */
     private _run(): void {
         if (this._media.paused) {
             this._media.play();

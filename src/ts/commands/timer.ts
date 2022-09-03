@@ -1,6 +1,9 @@
 import { ITime } from '../interfaces';
 import BaseCommand from './base';
 
+/**
+ * Time indicator
+ */
 export default class Timer extends BaseCommand {
     private _span: HTMLElement;
     private _duration: ITime;
@@ -19,6 +22,9 @@ export default class Timer extends BaseCommand {
         this._onLoadedData();
     }
 
+    /**
+     * After load metadata we can fill default values
+     */
     private _onLoadedData(): void {    
         if (this._media.duration) {
             this._duration = this._toTime(this._media.duration);
@@ -30,11 +36,18 @@ export default class Timer extends BaseCommand {
         }
     }
 
+    // video playing
     private _onTimeUpdate(): void {
         const current = this._toTime(this._media.currentTime);
         this._setTime(current, this._duration); 
     }
 
+    /**
+     * Put text to plugin
+     * @param current 
+     * @param duration 
+     * @returns 
+     */
     private _setTime(current: ITime, duration: ITime): void {
         if (!duration) {
             return;
@@ -45,6 +58,11 @@ export default class Timer extends BaseCommand {
         this._span.innerText = `${currentStr} / ${durationStr}`;
     }
 
+    /**
+     * compile time to convenient format
+     * @param timeInSeconds 
+     * @returns 
+     */
     private _toTime(timeInSeconds: number): ITime {
         var sec_num = Math.round(timeInSeconds);
         var hours   = Math.floor(sec_num / 3600);

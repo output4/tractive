@@ -4,8 +4,9 @@
   "description": "Tractive test task",
   "main": "index.js",
   "scripts": {
-    "postinstall": "gulp",
-    "watch": "nohup gulp watch"
+    "postinstall": "npm run compile",
+    "compile": "gulp",
+    "watch": "gulp watch"
   },
   "author": "rv.nevstruev",
   "license": "ISC",

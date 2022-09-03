@@ -1,5 +1,9 @@
 import BaseCommand from './base';
 
+/**
+ * Volume slider
+ * Default browser slider
+ */
 export default class Volume extends BaseCommand {
     private _range: HTMLInputElement;
     private _savedValue: number = 50;
@@ -10,6 +14,7 @@ export default class Volume extends BaseCommand {
         this._onExternalChange = this._onExternalChange.bind(this);
 
         this._range = document.createElement('input');
+        this._range.classList.add('command', 'volume');
         this._range.setAttribute('type', 'range');
         this._range.setAttribute('min', '0');
         this._range.setAttribute('max', '100');
@@ -21,6 +26,10 @@ export default class Volume extends BaseCommand {
         this._media.addEventListener('volumechange', this._onExternalChange);
     }
 
+    /**
+     * Callback for listen external volume changes. (For example mute / unmute button)
+     * After unmute we return to previous value
+     */
     private _onExternalChange(): void {
         if (this._media.muted) {
             this._wasMuted = true;
@@ -34,6 +43,9 @@ export default class Volume extends BaseCommand {
         this._range.value = `${value}`;
     }
 
+    /**
+     * Slider change listener
+     */
     private _onChange(): void {
         const value = parseInt(this._range.value, 10);
         this._media.volume = value / 100;

@@ -8,16 +8,28 @@ import Volume from './commands/volume';
 
 import { CommandsArray, IConfig, IAvailableCommands, Commands, ICommand } from './interfaces';
 
-const availableCommands: IAvailableCommands = {
-    progress: Progress,
+// Put progress bar to top, because it very big plugin
+const availableCommandsTop: Partial<IAvailableCommands> = {
+    progress: Progress
+}
+
+// Left side commands
+const availableCommandsLeft: Partial<IAvailableCommands> = {
     play: Play,
     download: Download,
     mute: Mute,
     volume: Volume,
-    timer: Timer,
-    fullscreen: Fullscreen
 };
 
+// Right side commands
+const availableCommandsRight: Partial<IAvailableCommands> = {
+    timer: Timer,
+    fullscreen: Fullscreen
+}
+
+/**
+ * Commands controller class
+ */
 export default class CommandsController {
     private _parent: HTMLElement;
     private _container: HTMLElement;
@@ -37,29 +49,56 @@ export default class CommandsController {
         this._init();
     }
 
-    private _init(): void {
-        const commandsContainer = document.createElement('div');
-        commandsContainer.classList.add('commands-layer');
-        this._container = commandsContainer;
-        this._parent.appendChild(commandsContainer);
-
-        Object.keys(availableCommands).forEach((commandKey: Commands) => {
+    /**
+     * Initialize and put command to stack
+     * @param commands 
+     * @param container 
+     */
+    private _inserCommands(commands: Partial<IAvailableCommands>, container: HTMLElement): void {
+        Object.keys(commands).forEach((commandKey: Commands) => {
             if (this._commandsEnabled.indexOf(commandKey) === -1) {
                 return;
             }
-            const command = availableCommands[commandKey];
+            const command = commands[commandKey];
             if (command) {
-                const cmd = new command(this._container, this._video, this._config);
+                const cmd = new command(container, this._video, this._config);
                 cmd.init();
                 this._initCommands.push(cmd);
             }
         });
     }
 
+    /**
+     * init all commands and build containers
+     */
+    private _init(): void {
+        const commandsContainer = document.createElement('div');
+        commandsContainer.classList.add('commands-layer');
+        this._container = commandsContainer;
+        this._parent.appendChild(commandsContainer);
+        
+        const topDiv = document.createElement('div');
+        const leftDiv = document.createElement('div');
+        const rightDiv = document.createElement('div');
+
+        this._container.appendChild(topDiv);
+        this._container.appendChild(leftDiv);
+        this._container.appendChild(rightDiv);
+
+        // top commands
+        this._inserCommands(availableCommandsTop, topDiv);
+        // left side commands
+        this._inserCommands(availableCommandsLeft, leftDiv);
+        // right side commands
+        this._inserCommands(availableCommandsRight, rightDiv);
+    }
+
+    // destroy controller method
     destroy(): void {
         this._initCommands.forEach((cmd) => {
             cmd.destroy();
         });
+        this._initCommands = [];
         this._container.parentNode.removeChild(this._container);
     }
 }

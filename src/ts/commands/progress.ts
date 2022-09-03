@@ -1,5 +1,8 @@
 import BaseCommand from './base';
 
+/**
+ * Progress bar for player
+ */
 export default class Progress extends BaseCommand {
     private _span: HTMLElement;
     private _duration: number;
@@ -20,10 +23,16 @@ export default class Progress extends BaseCommand {
         this._progress();
     }
 
+    /**
+     * When metadata loaded, we need get the duration of video
+     */
     private _updateDuration(): void {
         this._duration = Math.round(this._media.duration);
     }
 
+    /**
+     * When video playing, we fixing progress and drawing progress bar
+     */
     private _progress(): void {
         if (!this._duration) {
             this._updateDuration();
@@ -36,6 +45,9 @@ export default class Progress extends BaseCommand {
         this._span.style.background = `linear-gradient(to right, var(--progress-fillColor) ${pers}%, var(--progress-bgColor) ${pers}%)`;
     }
 
+    /**
+     * Listen click on progress bar and move to selected time
+     */
     private _toTime(e: MouseEvent): void {
         if (!this._duration) {
             this._updateDuration();

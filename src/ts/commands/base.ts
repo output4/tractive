@@ -1,5 +1,8 @@
 import { ICommand, IConfig } from '../interfaces';
 
+/**
+ * Base command class
+ */
 export default class BaseCommand implements ICommand {
     _container: HTMLElement;
     _config: IConfig;
@@ -11,11 +14,16 @@ export default class BaseCommand implements ICommand {
         this._media = media;
     }
 
-
+    /**
+     * Method called when command attached to panel
+     */
     init(): void {
 
     }
 
+    /**
+     * Method for destroy command and remove linsteners
+     */
     destroy(): void {
         
     }

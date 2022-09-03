@@ -6,6 +6,10 @@ const AUTOPLAY: boolean = false;
 
 /**
  * Main class of video player
+ * @example:
+ * const player = new TractivePlayer(container, config);
+ * @description
+ * See full api in README.md
  */
 export default class TractivePlayer {
     private _config: IConfig;
@@ -14,12 +18,14 @@ export default class TractivePlayer {
     private _commandsController: CommandsController;
     
     constructor(container: HTMLElement, config: IConfig) {
+        this._resize = this._resize.bind(this);
+        this._handleError = this._handleError.bind(this);
+
         this._initConfig(config);
         if (!container) {
             throw 'Please set container for video player';
         }
         this._container = container;
-
         this._init();
     }
 
@@ -49,14 +55,21 @@ export default class TractivePlayer {
     private _init(): void {
         this._mediaContainer = document.createElement('video');
         this._container.appendChild(this._mediaContainer);
-
+        this._mediaContainer.addEventListener('loadedmetadata', this._resize);
+        this._mediaContainer.addEventListener('error', this._handleError);
+        
+        /**
+         * if user set option autoplay: true, 
+         * but it works only after init class manually(after user had click)
+         */
         if (this._config.autoplay) {
             this._mediaContainer.setAttribute('autoplay', 'true');
         }
+        // preview image
         if (this._config.poster) {
             this._mediaContainer.setAttribute('poster', this._config.poster);
         }
-
+        // we can use native player commands
         if (this._config.nativeCommands && this._mediaContainer.canPlayType) {
             this._mediaContainer.setAttribute('controls', 'true');
         } else {
@@ -81,6 +94,23 @@ export default class TractivePlayer {
         }
     }
 
+    // Listener for setting the correct player size after loading metadata
+    private _resize(): void {
+        const size = this._mediaContainer.getBoundingClientRect();
+        this._container.style.height = `${size.height}px`;
+    }
+
+    // Errors listener
+    private _handleError(e: ErrorEvent): void {
+        this._container.innerText = 'Something went wrong!';
+        throw Error;
+    }
+
+    /**
+     * Method for refresh commands panel
+     * @param commands 
+     * @public
+     */
     changeCommands(commands: CommandsArray): void {
         this._commandsController.destroy();
         this._commandsController = null;
@@ -89,8 +119,15 @@ export default class TractivePlayer {
         this._commandsController = new CommandsController(this._container, this._config);
     }
 
+    /**
+     * Method for destroy instance of player
+     */
     destroy(): void {
-        this._commandsController.destroy();
+        if (this._commandsController) {
+            this._commandsController.destroy();
+        }
         this._mediaContainer.parentNode.removeChild(this._mediaContainer);
+        this._mediaContainer.removeEventListener('loadedmetadata', this._resize);
+        this._mediaContainer.removeEventListener('error', this._handleError);
     }
 }

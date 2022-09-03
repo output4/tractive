@@ -1,5 +1,8 @@
 import BaseCommand from './base';
 
+/**
+ * Command for mute / unmute sound
+ */
 export default class Mute extends BaseCommand {
     private _btn: HTMLElement;
 
@@ -18,11 +21,17 @@ export default class Mute extends BaseCommand {
         this._toggleClasses();
     }
 
+    /**
+     * toggle classes on the button
+     */
     private _toggleClasses(): void {
         this._btn.classList.add(this._media.muted || this._media.volume === 0 ? 'fa-volume-off' : 'fa-volume-high');
         this._btn.classList.remove(this._media.muted || this._media.volume === 0 ? 'fa-volume-high' : 'fa-volume-off');
     }
 
+    /**
+     * switching the mode on the media container
+     */
     private _toggle(): void {
         this._media.muted = !this._media.muted;
     }
