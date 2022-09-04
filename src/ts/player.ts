@@ -31,7 +31,7 @@ export default class TractivePlayer {
 
     /**
      * Function check and fill config
-     * @param config IConfig
+     * @param {IConfig} config
      */
     private _initConfig(config: IConfig): void {
         if (!config) {
@@ -100,7 +100,10 @@ export default class TractivePlayer {
         this._container.style.height = `${size.height}px`;
     }
 
-    // Errors listener
+    /**
+     * Errors listener
+     * @param {ErrorEvent} e 
+     */
     private _handleError(e: ErrorEvent): void {
         this._container.innerText = 'Something went wrong!';
         throw Error;
@@ -108,7 +111,7 @@ export default class TractivePlayer {
 
     /**
      * Method for refresh commands panel
-     * @param commands 
+     * @param {CommandsArray} commands 
      * @public
      */
     changeCommands(commands: CommandsArray): void {

@@ -44,9 +44,9 @@ export default class Timer extends BaseCommand {
 
     /**
      * Put text to plugin
-     * @param current 
-     * @param duration 
-     * @returns 
+     * @param {ITime} current - current position
+     * @param {ITime} duration - duration of video
+     * @returns void
      */
     private _setTime(current: ITime, duration: ITime): void {
         if (!duration) {
@@ -60,8 +60,8 @@ export default class Timer extends BaseCommand {
 
     /**
      * compile time to convenient format
-     * @param timeInSeconds 
-     * @returns 
+     * @param {number} timeInSeconds 
+     * @returns {ITime}
      */
     private _toTime(timeInSeconds: number): ITime {
         var sec_num = Math.round(timeInSeconds);

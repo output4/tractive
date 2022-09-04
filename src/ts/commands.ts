@@ -51,8 +51,8 @@ export default class CommandsController {
 
     /**
      * Initialize and put command to stack
-     * @param commands 
-     * @param container 
+     * @param {IAvailableCommands} commands 
+     * @param {HTMLElement} container 
      */
     private _inserCommands(commands: Partial<IAvailableCommands>, container: HTMLElement): void {
         Object.keys(commands).forEach((commandKey: Commands) => {
