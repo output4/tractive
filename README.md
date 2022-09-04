@@ -1,7 +1,9 @@
 # Test task for Tractive
 
 **Author:** Roman Nevstruev
+
 **Task:** Create video player component
+
 **Description:**
 I made the component on vanilla js, without using any third-party libraries.
 I use gulp for build project, less for css.
