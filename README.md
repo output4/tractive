@@ -13,13 +13,21 @@ npm install
 cd ./dist and open index.html in browser
 
 **Project structure:**
+
 ./src/ts - typescript source files
+
 ./src/ts/player.ts - Main component of video player
+
 ./src/ts/commands.ts - Class-controller for commands
+
 ./src/ts/commands/* - Folder with commands files
+
 ./src/webfonts - Font awesome icons form buttons
+
 ./src/less - less files
+
 ./dist - folder for compiled files
+
 
 **Api component:**
 
