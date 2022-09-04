@@ -9,8 +9,15 @@ I made the component on vanilla js, without using any third-party libraries.
 I use gulp for build project, less for css.
 
 **Installation:**
-npm install
-cd ./dist and open index.html in browser
+
+*npm install*
+
+*cd ./dist* and open index.html in browser
+
+For open player press *Run player*
+
+Use the checkboxes to show/hide commands on the video player
+
 
 **Project structure:**
 
