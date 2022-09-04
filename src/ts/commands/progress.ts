@@ -47,6 +47,7 @@ export default class Progress extends BaseCommand {
 
     /**
      * Listen click on progress bar and move to selected time
+     * @param {MouseEvent} e
      */
     private _toTime(e: MouseEvent): void {
         if (!this._duration) {
