@@ -129,8 +129,8 @@ export default class TractivePlayer {
         if (this._commandsController) {
             this._commandsController.destroy();
         }
-        this._mediaContainer.parentNode.removeChild(this._mediaContainer);
         this._mediaContainer.removeEventListener('loadedmetadata', this._resize);
         this._mediaContainer.removeEventListener('error', this._handleError);
+        this._mediaContainer.parentNode.removeChild(this._mediaContainer);
     }
 }
